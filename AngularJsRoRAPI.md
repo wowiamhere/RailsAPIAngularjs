@@ -75,13 +75,58 @@ rails generate scaffold RailsObject firstName:string lastName:string
 The 'scaffold' option of the command sets you up with 
 * controller
 * views
-* model
+* migration
 * test suite
 
-The name "RailsObject" is convenient because the generation command uses this name for the controller, model, views, etc..
+The name "RailsObject" is convenient because the generation command uses this name for the controller, migration, views, etc..
 Since we are dealing with an [ORM-language] (Object Relational Mapping) 
 
 ![rails-scaffold-output]
+
+All that an application needs to interact with a database has been set in place
+* the controllers that run the show
+* the routing file, which directs requests to the appropriate action/method within the controller
+* the set of views for each action/method within the controller
+   * index -- to list all database information (as objects with a 1-to-1 relationship with table columns/rows, etc..) 
+   * edit -- to update database
+   * show -- view a specific record
+   * new -- create a new entry
+* the migration
+   * the file that will define the database
+* helpers
+   * these modules are available to aid the controllers. You may code any functions/methods that fit your needs.  They are automatically available in all views
+   * assets -- all javascript, css, etc.
+
+If you run 
+
+```rails
+rails server
+```
+to  check if the Application runs on a web browser you will see this following error:
+
+![migration-pending-error]
+
+to fix this you must run the rails command
+
+```rails
+$ bundle exec rake db:migrate
+```
+
+bundle exec makes sure that the version of the rake command being run corresponds to the version within the Gemfile of the application, which is located in the root directory without a file extension
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -94,4 +139,4 @@ Since we are dealing with an [ORM-language] (Object Relational Mapping)
 [folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
 [rails-scaffold-output]: <https://github.com/wowiamhere/RailsAPIAngularjs/raw/appScaffold/projectData/images/railsObjectScaffold.png> "rails generate scaffold output .png"
-
+[migration-pending-error]: https://github.com/wowiamhere/RailsAPIAngularjs/blob/appScaffold/projectData/images/migrationsPendingError.png?raw=true "migragrions pending error .png"
