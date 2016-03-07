@@ -4,188 +4,94 @@ Some are too advanced, some miss certain key steps or some are just too obscure 
 
 The purpose of this tutorial is to show you how to:
 
-   * CREATE a RoR application
+   1. CREATE a RoR application
+      * set up the application's controller, views and model
+         * in the views 
+            * AngularJs will live and call to the API
+         * the model
+            * dictates what is the information squema in the database (we'll get to that) 
+      * set up the API module
+         * this basically requires a quick command line trip and *viola!*
+         * write some methods to retrieve information
+    
    * HOOK up AngularJs (using BOWER to handle front end dependencies)
    * SET UP an API to serve data in JSON format
    * MAKE AngularJs CALLS to the API, and
    * touch upon some relevant AngularJs powerfull features
 
-All source code available at: [my-github-accout] 
+All source code available at: [my-github-account]. 
 
+Lets begin
 
+## 1. Create Rails Project
 
-
-
-[my-github-account]: https://github.com/wowiamhere/RailsAPIAngularjs
-
-
-    
-
-
-
-
-
-
-
-
-
-# Dillinger
-
-Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
-
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
-
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
-
-### Version
-3.2.7
-
-### Tech
-
-Dillinger uses a number of open source projects to work properly:
-
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [Marked] - a super fast port of Markdown to JavaScript
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [keymaster.js] - awesome keyboard handler lib by [@thomasfuchs]
-* [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-### Installation
-
-You need Gulp installed globally:
-
-```sh
-$ npm i -g gulp
+```rails
+$ bin/rails new RailsAPIAngularjs
 ```
 
-```sh
-$ git clone [git-repo-url] dillinger
-$ cd dillinger
-$ npm i -d
-$ gulp build --prod
-$ NODE_ENV=production node app
+This will get you set up with:
+* rails project directory
+   * when you create a rails  application, the Rails Framwork automaticall creates a directory with folders and files that set up the most basic project for you: [rails-initial-directory]
+   * for more advanced features, there is more on "scaffolding" at [rails-scaffolding]
+
+      Here is the end result in Sublime Text Editor
+
+![rails folder structure][folder-structure-png]
+
+We will be working within (at least) the following folders:
+* app/assets
+   * javascripts
+   * css
+* app/controllers
+* app/models (just a bit to set up the class for the database)
+* app/views
+* vendor (for all the font-end dependencies)
+
+## 1.1 Set up the controller, views and model
+   
+   [rails-scaffolding] is a powerful command line tool that lets you generate files/folders/code to minimazie all boring/repetitive coding.
+   From the command line you can explore various options for generation for your app
+   
+```rails
+$ rails generate
 ```
 
-### Plugins
+will give you a list of options to choose from and their respective optional parameters, 
 
-Dillinger is currently extended with the following plugins
+![rails-generate-command-png]
 
-* Dropbox
-* Github
-* Google Drive
-* OneDrive
+this is only available from the home directory of your app after you have created it via the 
 
-Readmes, how to use them in your own application can be found here:
+```rails
+$ rails new [app-name]
+```
+command.
 
-* [plugins/dropbox/README.md] [PlDb]
-* [plugins/github/README.md] [PlGh]
-* [plugins/googledrive/README.md] [PlGd]
-* [plugins/onedrive/README.md] [PlOd]
-
-### Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
+Let's run the generation command 
+```rails
+rails generate scaffold RailsObject firstName:string lastName:string
 ```
 
-Second Tab:
-```sh
-$ gulp watch
-```
+The 'scaffold' option of the command sets you up with 
+* controller
+* views
+* model
+* test suite
 
-(optional) Third:
-```sh
-$ karma start
-```
+The name "RailsObject" is convenient because the generation command uses this name for the controller, model, views, etc..
+Since we are dealing with an [ORM-language] (Object Relational Mapping) 
 
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image. 
-
-```sh
-cd dillinger
-docker build -t <youruser>/dillinger:latest .
-```
-This will create the dillinger image and pull in the necessary dependencies. Once done, run the Docker and map the port to whatever you wish on your host. In this example, we simply map port 80 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 80:80 --restart="always" <youruser>/dillinger:latest
-```
-
-Verify the deployment by navigating to your server address in your preferred browser.
-
-### N|Solid and NGINX
-
-More details coming soon.
-
-#### docker-compose.yml
-
-Change the path for the nginx conf mounting path to your full path, not mine!
-
-### Todos
-
- - Write Tests
- - Rethink Github Save
- - Add Code Comments
- - Add Night Mode
-
-License
-----
-
-MIT
+![rails-scaffold-output]
 
 
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [@thomasfuchs]: <http://twitter.com/thomasfuchs>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [marked]: <https://github.com/chjj/marked>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [keymaster.js]: <https://github.com/madrobby/keymaster>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
+[my-github-account]: <https://github.com/wowiamhere/RailsAPIAngularjs>
+[rails-initial-directory]:<http://guides.rubyonrails.org/getting_started.html#creating-the-blog-application>
+[rails-scaffolding]: <http://guides.rubyonrails.org/command_line.html#command-line-basics>
+[ORM-language]: <http://guides.rubyonrails.org/active_record_basics.html#object-relational-mapping>
 
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]:  <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
+[folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
+[rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
+[rails-scaffold-output]: <https://github.com/wowiamhere/RailsAPIAngularjs/raw/appScaffold/projectData/images/railsObjectScaffold.png> "rails generate scaffold output .png"
 
