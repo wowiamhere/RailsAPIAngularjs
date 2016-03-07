@@ -114,19 +114,22 @@ $ bundle exec rake db:migrate
 
 bundle exec makes sure that the version of the rake command being run corresponds to the version within the Gemfile of the application, which is located in the root directory without a file extension
 
+![migration]
 
+Now we have an app up and running with:
+* CRUD capabilities (create, read, update, delete)
 
+Run
 
+```rails
+$ rails server
+```
 
+to view the default Rails home screen.
 
-
-
-
-
-
-
-
-
+This is where our Angular application will be hard coded.  It is from here that:
+* Angular will make calls via an API module to the database
+* Display that response on this main view within your applciation
 
 
 
@@ -140,3 +143,4 @@ bundle exec makes sure that the version of the rake command being run correspond
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
 [rails-scaffold-output]: <https://github.com/wowiamhere/RailsAPIAngularjs/raw/appScaffold/projectData/images/railsObjectScaffold.png> "rails generate scaffold output .png"
 [migration-pending-error]: https://github.com/wowiamhere/RailsAPIAngularjs/blob/appScaffold/projectData/images/migrationsPendingError.png?raw=true "migragrions pending error .png"
+[migration]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/appScaffold/projectData/images/migration.png "migration .png"
