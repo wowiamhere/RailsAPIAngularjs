@@ -3,6 +3,10 @@
 [rails-scaffolding]: <http://guides.rubyonrails.org/command_line.html#command-line-basics>
 [ORM-language]: <http://guides.rubyonrails.org/active_record_basics.html#object-relational-mapping>
 [Active-Record-object]: <http://guides.rubyonrails.org/active_record_basics.html#crud-reading-and-writing-data>
+[Bootstrap]: <http://getbootstrap.com/css>
+[ruby-gems]: <https://rubygems.org/gems/bootstrap-sass>
+[Sass]: <http://sass-lang.com/guide>
+[asset-pipeline]: <http://guides.rubyonrails.org/v3.2.8/asset_pipeline.html#what-is-the-asset-pipeline>
 
 [folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
@@ -13,9 +17,9 @@
 [rails-api-scaffold]: https://github.com/wowiamhere/RailsAPIAngularjs/blob/apiController/projectData/images/apiScaffoldFolders.png?raw=true "api scaffold dir .png"
 [rails-routes1]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/routes1.png "routes.rb from scaffold .png"
 [index-view]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/viewIndex.png "index code .png"
+[home-index]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/css/projectData/images/homeIndex.png "home index .png"
 
-Serve AngularJs via Ruby on Rails Backend
-=
+# Serve AngularJs via Ruby on Rails Backend
 
 We will be working with:
 + Rails 4.2.5
@@ -45,8 +49,7 @@ All source code available at: [my-github-account].
 
 Lets begin
 
-1.0 Create Rails Project
-=
+# 1.0 Create Rails Project
 
 ```rails
 $ bin/rails new RailsAPIAngularjs
@@ -70,8 +73,7 @@ We will be working within (at least) the following folders:
 + app/views
 + vendor (for all the font-end dependencies)
 
-1.1 Set up the controller, views and model
---
+## 1.1 Set up the controller, views and model
    
 [rails-scaffolding] is a powerful command line tool that lets you generate files/folders/code to minimazie all boring/repetitive coding.
 
@@ -152,8 +154,8 @@ This is where our Angular application will be hard coded.  It is from here that:
 
 On to creating our backend API.
 
-1.2 Setting the routes
---
+## 1.2 Setting the routes
+
 The default routes created by the scaffolding system looks as follows in `~/config/routes.rb` 
 
 ![rails-routes1]
@@ -166,27 +168,53 @@ get '/' => 'rails_objects#index'
 Now a request to `localhost:3000` or to `http://www.yourWebsite.com` is handled by the `index` method` of the `angular_data` controller within the `api module`.
 Some refractoring within the `~/app/views` and we'll launch the server to take a look.
 
-1.3 ~/app/controllers/rails_objects_controller.rb
---
+## 1.3 ~/app/controllers/rails_objects_controller.rb
 
 For this tutorial, we will be leaving the scaffolded code provided by Rails and lay AngularJs next to it for contrast.
 
-1.4 Preparing ~/app/views
---
+## 1.4 Preparing ~/app/views
 
 We will be displaying the data fetched by AngularJs next to the rendering of an [Active-Record-object] to give an idea of the versatility of AngulaJs.
 
-1.4.1 Set Up Bootstrap for css tweeking
+### 1.4.1 Set Up [Bootstrap] 
 
-in `~/gemfile`
+For css tweeking the main view of the application, thanks to [ruby-gems] like bootstrap-sass, in `~/gemfile`
 ```rails
-gem 'sprockets',     '3.3.0'
-gem 'bootstrap-sass', '~>3.3.5.1'
+# always be mindful of dependencies
+gem 'bootstrap-sass'
 ```
 then, to update, run
 ```rails
 $ bundle install
 ```
+After that, go to `~/app/assets/application.css.scss`, and add the following 2 @import lines at the end of the directives,
+
+```rails
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+```
+You may need to restart your server to get the [asset-pipeline] up to date;but, this should give your the power of [bootstrap].
+
+If by any chance all the files in this directory do not have a `.css` right after the file name, go ahead and add it;it should go before the `.scss`.  The first extension refers to the style sheet while the second has to do with the scripting language [Sass] that is embedded into stylesheets and makes them more powerfull.
+
+Got to `~/app/views/index.html.erb` and include `class="table"` to view the benefits
+```rails
+<table class="table">
+  <thead>
+```
+run
+```rails
+$ rails server
+```
+and  here's the view served configured in routes.rb earlier
+
+![home-index]
+
+Now let's set up the module from where AngularJs will be pulling from the database onto the front end of the application.
+After that, onto Bower to manage frontend dependencies.
 
 2.0 Set Up the API module (rails for namespace)
 =
