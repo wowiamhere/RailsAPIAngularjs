@@ -1,4 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>AngularJs Installed on Front End of Application</h1>
+<h1>Listing Rails Objects</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Gender</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rails_objects.each do |rails_object| %>
+      <tr>
+        <td><%= rails_object.firstName %></td>
+        <td><%= rails_object.lastName %></td>
+        <td><%= rails_object.gender %></td>
+        <td><%= link_to 'Show', rails_object %></td>
+        <td><%= link_to 'Edit', edit_rails_object_path(rails_object) %></td>
+        <td><%= link_to 'Destroy', rails_object, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rails object', new_rails_object_path %>
