@@ -1,15 +1,19 @@
 Serve AngularJs via Ruby on Rails Backend
 =
 
-Combing the internet for the right forum/discussion etc can be challenging when it comes to finding exactly what you want.
-Some are too advanced, some miss certain key steps or some are just too obscure to understand.
+We will be working with:
++ Rails 4.2.5
++ Bower
++ Bootstrap
++ AngularJs
 
 The purpose of this tutorial is to show you how to:
 
 1. CREATE a RoR application
-     + set up the application's controller, views and model
-     + in the views 
-        + AngularJs will live and call to the API
+    + set up the application's controller, views and model
+    + in the views 
+        * AngularJs will live and call to the API
+        * will do some styling to set-up for out CRUD functions via AngularJS 
      + the model
         + dictates what is the information squema in the database (we'll get to that) 
 2. set up the API module
@@ -132,14 +136,52 @@ This is where our Angular application will be hard coded.  It is from here that:
 
 On to creating our backend API.
 
+1.2 Setting the routes
+--
+The default routes created by the scaffolding system looks as follows in `~/config/routes.rb` 
+
+![rails-routes1]
+
+to redefine the application's home page, open routes.rb and type
+
+```rails
+get '/' => 'rails_objects#index'
+```
+Now a request to `localhost:3000` or to `http://www.yourWebsite.com` is handled by the `index` method` of the `angular_data` controller within the `api module`.
+Some refractoring within the `~/app/views` and we'll launch the server to take a look.
+
+1.3 Preparing ~/app/controllers
+--
+
+
+1.4 Preparing ~/app/views
+--
+
+Setting up some stylying to prepare the Front End where our AngularJs app will live.
+Let's start with `~/app/views/rails_objects/index.html.erb`. Copy the code from below into your project:
+
+![index-view]
+
+The `<% @rails_objects.each do |rails_object| %> <% end %>` block loops through the object from the `index` controller, `rails_object` in this case, and renders each attibute of the Active Record Object within a table via the `<%= %>` erb syntax.
+
 2.0 Set Up the API module (rails for namespace)
 =
 
 We will run the `generate command` but we will not be using the views part of the API. We will use the controllers to fetch information for us.
 
 ```rails
-$ rails generate 
+$ rails generate scaffold_controller api/AngularData --model-name=rails_objet
 ```
+the `--model-name=rails_object` option lets you pass in the model name that the scaffolding system is going to use to generate the code within the methods of the controller.
+
+This is the output in the command line:
+
+![rails-api-scaffold]
+
+`$ rails generate scaffold_controller` has generated a module based on the name passed for the controller, in this case `api/AngularData`, for both the app/controllers and app/views folders, amongst others.
+
+
+
 
 [my-github-account]: <https://github.com/wowiamhere/RailsAPIAngularjs>
 [rails-initial-directory]:<http://guides.rubyonrails.org/getting_started.html#creating-the-blog-application>
@@ -152,3 +194,6 @@ $ rails generate
 [migration-pending-error]: https://github.com/wowiamhere/RailsAPIAngularjs/blob/appScaffold/projectData/images/migrationsPendingError.png?raw=true "migragrions pending error .png"
 [migration]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/appScaffold/projectData/images/migration.png "migration .png"
 [rails-default-home]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsDefaultHome.png "rails default home page .png"
+[rails-api-scaffold]: https://github.com/wowiamhere/RailsAPIAngularjs/blob/apiController/projectData/images/apiScaffoldFolders.png?raw=true "api scaffold dir .png"
+[rails-routes1]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/routes1.png "routes.rb from scaffold .png"
+[index-view]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/viewIndex.png "index code .png"
