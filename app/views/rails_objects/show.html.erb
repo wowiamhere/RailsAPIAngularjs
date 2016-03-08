@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @rails_object.firstName %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @rails_object.lastName %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @rails_object.gender %>
+</p>
+
+<%= link_to 'Edit', edit_rails_object_path(@rails_object) %> |
+<%= link_to 'Back', rails_objects_path %>
