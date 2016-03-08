@@ -7,6 +7,9 @@
 [ruby-gems]: <https://rubygems.org/gems/bootstrap-sass>
 [Sass]: <http://sass-lang.com/guide>
 [asset-pipeline]: <http://guides.rubyonrails.org/v3.2.8/asset_pipeline.html#what-is-the-asset-pipeline>
+[Bower]: <http://bower.io/>
+[Node, npm]: <https://nodejs.org/en/>
+[Bower-components]: <http://bower.io/search/>
 
 [folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
@@ -213,8 +216,36 @@ and  here's the view served configured in routes.rb earlier
 
 ![home-index]
 
-Now let's set up the module from where AngularJs will be pulling from the database onto the front end of the application.
-After that, onto Bower to manage frontend dependencies.
+Now onto [Bower] to manage frontend dependencies.
+
+#### 1.4.2 Installing [Bower] 
+[Bower] is a powerful tool to maintain your frontend packages and their dependencies.  Be aware that [Node, npm] and Git are required to install [Bower] -make sure your path is updated.
+In ~/
+```rails
+~/
+$ npm install -g bower
+```
+You can check the version of bower installed
+```rails
+$ bower -v
+```
+Now create a file `.bowerrc` in `~/` that tells [Bower] where to install the components
+```rails
+~/
+{
+   "directory":"vendor/assets/components"
+}
+```
+After that, create a .json file `bower.json` in `~/` listing which [Bower-components] to install -the search page on [Bower]'s website is a perfect example of AngularJs's powerful features, with some styling, this App is not very far away from the connective capabilities of that web page. Now, add the components required, in this case AngularJs
+```rails
+~/
+{
+   "dependencies": {
+   
+   }
+}
+```
+
 
 2.0 Set Up the API module (rails for namespace)
 =
