@@ -1,2 +1,2 @@
-/* branch: xxx */
-var angularApi_app = angular.module("angularApiApp");
+var angularApi_app = angular.module("angularApiApp").
+run(console.log("angularApiApp loaded!"));
