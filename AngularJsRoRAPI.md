@@ -1,4 +1,5 @@
 [my-github-account]: <https://github.com/wowiamhere/RailsAPIAngularjs>
+[Rails]: <http://guides.rubyonrails.org/getting_started.html>
 [rails-initial-directory]:<http://guides.rubyonrails.org/getting_started.html#creating-the-blog-application>
 [rails-scaffolding]: <http://guides.rubyonrails.org/command_line.html#command-line-basics>
 [ORM-language]: <http://guides.rubyonrails.org/active_record_basics.html#object-relational-mapping>
@@ -11,6 +12,11 @@
 [Node, npm]: <https://nodejs.org/en/>
 [Bower-components]: <http://bower.io/search/>
 [AngularJs]: <https://docs.angularjs.org/guide>
+[Sublime]: <https://www.sublimetext.com/>
+[module]: <https://docs.angularjs.org/guide/module>
+[ng-if]: <https://docs.angularjs.org/api/ng/directive/ngIf>
+[ng-bind]: <https://docs.angularjs.org/api/ng/directive/ngBind>
+[ng-model]: <https://docs.angularjs.org/api/ng/directive/ngModel>
 
 [folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
@@ -23,47 +29,48 @@
 [index-view]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/viewIndex.png "index code .png"
 [home-index]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/css/projectData/images/homeIndex.png "home index .png"
 
-# Serve AngularJs via Ruby on Rails Backend
+
+# Serve [AngularJs] via Ruby on [Rails] Backend
 
 We will be working with:
-+ Rails 4.2.5
-+ Bower
-+ Bootstrap
-+ AngularJs
++ [Rails] 4.2.5
++ [Bower]
++ [Bootstrap]
++ [AngularJs]
 
 The purpose of this tutorial is to show you how to:
 
 1. CREATE a RoR application
     + set up the application's controller, views and model
     + in the views 
-        * AngularJs will live and call to the API
-        * will do some styling to set-up for out CRUD functions via AngularJS 
+        * [AngularJs] will live and call to the API
+        * will do some styling to set-up for out CRUD functions via [AngularJS]
      + the model
         + dictates what is the information squema in the database (we'll get to that) 
 2. set up the API module
      * this basically requires a quick command line trip and *viola!*
      * write some methods to retrieve information
 
-* HOOK up AngularJs (using BOWER to handle front end dependencies)
+* HOOK up [AngularJs] (using [BOWER] to handle front end dependencies)
 * SET UP an API to serve data in JSON format
-* MAKE AngularJs CALLS to the API, and
-* touch upon some relevant AngularJs powerfull features
+* MAKE [AngularJs] CALLS to the API, and
+* touch upon some relevant [AngularJs] powerfull features
 
 All source code available at: [my-github-account]. 
 
-Lets begin
+Lets begin.
 
-# 1.0 Create Rails Project
+# 1.0 Create [Rails] Project
 
 ```rails
 $ bin/rails new RailsAPIAngularjs
 ```
 This will get you set up with:
-+ rails project directory
++ [rails] project directory
    + when you create a rails  application, the Rails Framwork automaticall creates a directory with folders and files that set up the most basic project for you: [rails-initial-directory]
    * for more advanced features, there is more on "scaffolding" at [rails-scaffolding]
 
-Here is the end result in Sublime Text Editor
+Here is the end result in [Sublime] Text Editor
 
 ![rails folder structure][folder-structure-png]
 
@@ -136,7 +143,7 @@ to fix this you must run the rails command
 ```rails
 $ bundle exec rake db:migrate
 ```
-bundle exec makes sure that the version of the rake command being run corresponds to the version within the Gemfile of the application, which is located in the root directory without a file extension
+`bundle exec` makes sure that the version of the rake command being run corresponds to the version within the Gemfile of the application, which is located in the root directory without a file extension
 
 ![migration]
 
@@ -174,11 +181,11 @@ Some refractoring within the `~/app/views` and we'll launch the server to take a
 
 ## 1.3 ~/app/controllers/rails_objects_controller.rb
 
-For this tutorial, we will be leaving the scaffolded code provided by Rails and lay AngularJs next to it for contrast.
+For this tutorial, we will be leaving the scaffolded code provided by [Rails] and lay AngularJs next to it for contrast.
 
 ## 1.4 Preparing ~/app/views
 
-We will be displaying the data fetched by AngularJs next to the rendering of an [Active-Record-object] to give an idea of the versatility of AngulaJs.
+We will be displaying the data fetched by [AngularJs] next to the rendering of an [Active-Record-object] to give an idea of the versatility of AngulaJs.
 
 ### 1.4.1 Set Up [Bootstrap] 
 
@@ -247,6 +254,10 @@ to update the gems.
 [Bower] makes it very simple to get up and running via a Gem-like-file in `~/' named Bowerfile (no extension); list the assets [Bower] will be handling
 ```rails
 # ~/Bowerfile
+asset 'angular'
+asset 'angular-route'
+asset 'angular-resource'
+asset 'angular-mocks'
 asset 'angular-ui-bootstrap-bower'
 asset 'bootstrap-sass-official'
 ```
@@ -272,17 +283,58 @@ And finally, add the new Frontend dependencies to the manifest files  in `~/app/
 
  Make sure your code matches below:
 ```rails
-// require turbolinks
-//
+/* ~/app/assets/javascripts */
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require turbolinks
 //= require angular/angular
-//= require angular-resource/angular-resource
-//= require angular-route/angular-route
 //= require angular-ui-bootstrap-bower/ui-bootstrap.js
 //= require angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
 ```
+and that's it! Angular is ready to go.
+
+#### 1.2.4.4 First [AngularJs] module
+In angular a [module] is like a container for the frontend application. In `~/app/assets/javascripts/application.js` code:
+```rails
+/* ~/app/assets/javascripts/application.js */
+var angularApiApp = angular.module("angularApiApp",[]).
+run(console.log("angularApiApp loaded!"));
+```
+this will create an [AngularJs][] [module] `angularApiApp` within a Javascript variable named `angularApiApp` in addition it runs a command on the frontend console outputting a success message `angularApiApp loaded!` which can be viewed using
+browser tools.
+
+In `~/app/views/layouts/application.html.erb`, mount the [AngularJs] application onto your [Rails] app:
+```rails
+# `~/app/views/layouts/application.html.erb`
+</head>
+<body ng-app="angularApiApp">
+...
+</body>
+```
+It's possible to do this within a `<html>, <body> or <div>` tag. 
+
+In `~/app/views/index.html.erb`
+```rails
+<div class="angularExample">
+  <div class="scopeVariable">
+    Hello
+    <span ng-if="name" ng-bind="name"></span> !!!
+  </div>
+Enter your name: <input type="text" ng-model="name"><br/>
+View the result Instantly! above. 
+</div>
+```
++ [ng-if]
+   + boolean for a set/unset value
++ [ng-bind]
+    + binds a scope variable to a DOM elememt
++ [ng-model]
+    + binds input to scope in [AngularJs]
+    
+Now run `$ rails server` and  visit `localhost:3000` on a browser and type anything in the input box and view the results instantly! No trip through the server! .... well, there isn't anythuing [AngularJs] is getting from a database just yet.
+This is simply a sample of how amazing it is.
+Now that it is up and running, let's configure the database, and then we'll comeback to retouch the index page to load all the database information for us.
 
 2.0 Set Up the API module (rails for namespace)
 =

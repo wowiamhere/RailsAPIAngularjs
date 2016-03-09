@@ -2,6 +2,15 @@
 
 <h1>Listing Rails Objects</h1>
 
+<div class="angularExample">
+  <div class="scopeVariable">
+    Hello
+    <span ng-if="name" ng-bind="name"></span> !!!
+  </div>
+Enter your name: <input type="text" ng-model="name"><br/>
+View the result Instantly! above. 
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -30,9 +39,3 @@
 
 <%= link_to 'New Rails object', new_rails_object_path %>
 
-<div ng-app="angularApiApp">
-hello
-<span ng-if="name" ng-bind="name"></span>
-<input type="text" ng-model="name">
-  
-</div>
