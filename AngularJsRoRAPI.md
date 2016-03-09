@@ -243,36 +243,34 @@ $ bundle install
 ```
 to update the gems.
 
-##### 1.4.2.2 [Bower] files and settings
-Now create a file `.bowerrc` in `~/` that tells [Bower] where to install the components
+##### 1.4.2.2 ~/[Bower]file
+[Bower] makes it very simple to get up and running via a Gem-like-file in `~/' named Bowerfile (no extension); list the assets [Bower] will be handling
 ```rails
-# ~/
-{
-   "directory":"vendor/assets/bower_components"
-}
+# ~/Bowerfile
+asset 'angular-ui-bootstrap-bower'
+asset 'bootstrap-sass-official'
 ```
-After that, create a .json file `bower.json` in `~/` listing which [Bower-components] to install -the search page on [Bower]'s website is a perfect example of AngularJs's powerful features, with some styling, this App is not very far away from the connective capabilities of that web page. Now, add the components required, in this case [AngularJs]
+then run 
 ```rails
-# ~/
-{
-  "name": "RailsApiAngurlarjs",
-  "dependencies": {
-    "angular": "latest"
-  }
-}
+$ rake bower:install
 ```
-Before running the [Bower] command to install all packages, Rails' [asset-pipeline] needs to know about the new stuff it has to include.  In `~/config/application.rb` tell Rails where the new stuff is:
+In `~/vendor/assets`, [Bower] places the components and a few other files:
++ `.bowerrc` : tells [Bower] where the assets live
+   * default : ~/vendor/assets/bower_components
++ `bower.json` : lists the dependencies [Bower] will be maintaining
+
+#### 1.2.4.3 Configure Rails' [asset-pipeline]
+The [asset-pipeline] needs to know about the new stuff it has to include.  In `~/config/application.rb` tell Rails where the new stuff is:
 ```rails
 # ~/config/application.rb
 config.assets.paths << Rails.root.join("vendor", "assets", "bower_components")
 ```
 
-#### 1.2.4.3 Install [Bower] managed App dependencies 
-```rails
-$ bower install
-```
+And finally, add the new Frontend dependencies to the manifest files  in `~/app/assets/javascripts/application.js.coffee`.
 
-And finally, add the new Frontend dependencies to the manifest files  in `~/app/assets/javascripts/application.js.coffee` -by the way, we will be changing the extensions on these files as we will be relying on pure Javascript to write our AngularJs code and not Coffeescript. Make sure your code matches below:
+*by the way, we will be changing the extensions on these files as we will be relying on pure Javascript to write our AngularJs code and not Coffeescript.*
+
+ Make sure your code matches below:
 ```rails
 // require turbolinks
 //
