@@ -15,7 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require angular/angular
-//= require angular-resource/angular-resource
-//= require angular-route/angular-route
 //= require angular-ui-bootstrap-bower/ui-bootstrap.js
 //= require angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
