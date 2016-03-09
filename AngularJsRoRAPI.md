@@ -266,6 +266,12 @@ Before running the [Bower] command to install all packages, Rails' [asset-pipeli
 # ~/config/application.rb
 config.assets.paths << Rails.root.join("vendor", "assets", "bower_components")
 ```
+
+#### 1.2.4.3 Install [Bower] managed App dependencies 
+```rails
+$ bower install
+```
+
 And finally, add the new Frontend dependencies to the manifest files  in `~/app/assets/javascripts/application.js.coffee` -by the way, we will be changing the extensions on these files as we will be relying on pure Javascript to write our AngularJs code and not Coffeescript. Make sure your code matches below:
 ```rails
 // require turbolinks
