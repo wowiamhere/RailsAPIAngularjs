@@ -10,6 +10,7 @@
 [Bower]: <http://bower.io/>
 [Node, npm]: <https://nodejs.org/en/>
 [Bower-components]: <http://bower.io/search/>
+[AngularJs]: <https://docs.angularjs.org/guide>
 
 [folder-structure-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/master/projectData/images/railsAPIAngularjsFolders.png "website logo .png"
 [rails-generate-command-png]: https://raw.githubusercontent.com/wowiamhere/RailsAPIAngularjs/apiController/projectData/images/railsGenerate.png "rails generate command .png"
@@ -218,34 +219,66 @@ and  here's the view served configured in routes.rb earlier
 
 Now onto [Bower] to manage frontend dependencies.
 
-#### 1.4.2 Installing [Bower] 
+#### 1.4.2 Set Up [Bower] 
 [Bower] is a powerful tool to maintain your frontend packages and their dependencies.  Be aware that [Node, npm] and Git are required to install [Bower] -make sure your path is updated.
 In ~/
 ```rails
-~/
+# ~/
 $ npm install -g bower
 ```
 You can check the version of bower installed
 ```rails
 $ bower -v
 ```
+
+##### 1.4.2.1  `~/Gemfile`
+In the Gemfile include the [Bower] gem found at [ruby-gems]:
+```rails
+# ~/Gemfile
+gem 'bower-rails'
+```
+Then run
+```rails
+$ bundle install
+```
+to update the gems.
+
+##### 1.4.2.2 [Bower] files and settings
 Now create a file `.bowerrc` in `~/` that tells [Bower] where to install the components
 ```rails
-~/
+# ~/
 {
-   "directory":"vendor/assets/components"
+   "directory":"vendor/assets/bower_components"
 }
 ```
-After that, create a .json file `bower.json` in `~/` listing which [Bower-components] to install -the search page on [Bower]'s website is a perfect example of AngularJs's powerful features, with some styling, this App is not very far away from the connective capabilities of that web page. Now, add the components required, in this case AngularJs
+After that, create a .json file `bower.json` in `~/` listing which [Bower-components] to install -the search page on [Bower]'s website is a perfect example of AngularJs's powerful features, with some styling, this App is not very far away from the connective capabilities of that web page. Now, add the components required, in this case [AngularJs]
 ```rails
-~/
+# ~/
 {
-   "dependencies": {
-   
-   }
+  "name": "RailsApiAngurlarjs",
+  "dependencies": {
+    "angular": "latest"
+  }
 }
 ```
-
+Before running the [Bower] command to install all packages, Rails' [asset-pipeline] needs to know about the new stuff it has to include.  In `~/config/application.rb` tell Rails where the new stuff is:
+```rails
+# ~/config/application.rb
+config.assets.paths << Rails.root.join("vendor", "assets", "bower_components")
+```
+And finally, add the new Frontend dependencies to the manifest files  in `~/app/assets/javascripts/application.js.coffee` -by the way, we will be changing the extensions on these files as we will be relying on pure Javascript to write our AngularJs code and not Coffeescript. Make sure your code matches below:
+```rails
+// require turbolinks
+//
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require angular/angular
+//= require angular-resource/angular-resource
+//= require angular-route/angular-route
+//= require angular-ui-bootstrap-bower/ui-bootstrap.js
+//= require angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
+```
 
 2.0 Set Up the API module (rails for namespace)
 =
