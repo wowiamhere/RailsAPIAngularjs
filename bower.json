@@ -1,0 +1,6 @@
+{
+	"name" : "RailsApiAngularjs",
+	"dependencies" : {
+		"angular" : "latest"
+	}
+}
