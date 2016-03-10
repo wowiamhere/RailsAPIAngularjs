@@ -48,7 +48,10 @@ The purpose of this tutorial is to show you how to:
         + the model
             + dictates what is the information squema in the database (we'll get to that)
     + configure [Rails] routes
-    + 
+    + inspect [Rails] controller
+    + set up [Rails] views
+        + set up [Bootstrap] 
+    + set up [Bower] for front end dependencies
 2. set up the API module
      * this basically requires a quick command line trip and *viola!*
      * write some methods to retrieve information
@@ -181,7 +184,7 @@ get '/' => 'rails_objects#index'
 Now a request to `localhost:3000` or to `http://www.yourWebsite.com` is handled by the `index` method` of the `angular_data` controller within the `api module`.
 Some refractoring within the `~/app/views` and we'll launch the server to take a look.
 
-## 1.3 the controller at `~/app/controllers/rails_objects_controller.rb`
+## 1.3 controller at `~/app/controllers/rails_objects_controller.rb`
 
 With this code, [Rails] makes the backend call to the database.  We will not be using this code, but rather have [AngularJs] make it's own front end calls via it's own API within a module (below)
 
@@ -229,7 +232,7 @@ and  here's the view served configured in routes.rb earlier
 
 Now onto [Bower] to manage frontend dependencies.
 
-#### 1.4.2 Set Up [Bower] 
+#### 1.5 Set Up [Bower] 
 [Bower] is a powerful tool to maintain your frontend packages and their dependencies.  Be aware that [Node, npm] and Git are required to install [Bower] -make sure your path is updated.
 In ~/
 ```rails
@@ -241,7 +244,7 @@ You can check the version of bower installed
 $ bower -v
 ```
 
-##### 1.4.2.1  `~/Gemfile`
+##### 1.5.1  `~/Gemfile`
 In the Gemfile include the [Bower] gem found at [ruby-gems]:
 ```rails
 # ~/Gemfile
