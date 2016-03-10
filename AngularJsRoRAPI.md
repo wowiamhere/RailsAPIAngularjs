@@ -42,11 +42,13 @@ The purpose of this tutorial is to show you how to:
 
 1. CREATE a RoR application
     + set up the application's controller, views and model
-    + in the views 
-        * [AngularJs] will live and call to the API
-        * will do some styling to set-up for out CRUD functions via [AngularJS]
-     + the model
-        + dictates what is the information squema in the database (we'll get to that) 
+        + in the views 
+            * [AngularJs] will live and call to the API
+            * will do some styling to set-up for out CRUD functions via [AngularJS]
+        + the model
+            + dictates what is the information squema in the database (we'll get to that)
+    + configure [Rails] routes
+    + 
 2. set up the API module
      * this basically requires a quick command line trip and *viola!*
      * write some methods to retrieve information
@@ -179,12 +181,13 @@ get '/' => 'rails_objects#index'
 Now a request to `localhost:3000` or to `http://www.yourWebsite.com` is handled by the `index` method` of the `angular_data` controller within the `api module`.
 Some refractoring within the `~/app/views` and we'll launch the server to take a look.
 
-## 1.3 ~/app/controllers/rails_objects_controller.rb
+## 1.3 the controller at `~/app/controllers/rails_objects_controller.rb`
 
-For this tutorial, we will be leaving the scaffolded code provided by [Rails] and lay AngularJs next to it for contrast.
+With this code, [Rails] makes the backend call to the database.  We will not be using this code, but rather have [AngularJs] make it's own front end calls via it's own API within a module (below)
 
 ## 1.4 Preparing ~/app/views
 
+For this tutorial, we will be leaving the scaffolded code provided by [Rails] and lay AngularJs next to it for contrast.
 We will be displaying the data fetched by [AngularJs] next to the rendering of an [Active-Record-object] to give an idea of the versatility of AngulaJs.
 
 ### 1.4.1 Set Up [Bootstrap] 
