@@ -32,7 +32,7 @@
 
 # Serve [AngularJs] via Ruby on [Rails] Backend  
 
-<small>Follow at: **<a href="http://zencodemaster.com/coding-post/2" target="_blank">ZenCodeMaster.com**</a></small>  
+<small>Follow at: **<a href="http://zencodemaster.com/coding-post/1" target="_blank">ZenCodeMaster.com**</a></small>  
 
 We will be working with:
 + [Rails] 4.2.5
